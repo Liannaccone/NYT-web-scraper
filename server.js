@@ -34,7 +34,7 @@ db.on('error', function(error) {
 });
 
 // load ROUTES
-require('./routes/routes.js')(app,passport);
+require('./routes/routes.js')(app);
 
 
 
