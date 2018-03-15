@@ -21,7 +21,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // static directory...
-// app.use(express.static("./public"));
+app.use(express.static("./public"));
 
 // db config...
 var databaseUrl = 'nyt-app';
