@@ -2,14 +2,21 @@
 // 		DEPENDENCIES
 // =============================
 
+var axios = require("axios");
+var logger = require("morgan");
 var express = require('express');
 var mongojs = require('mongojs');
 var request = require('request');
 var cheerio = require('cheerio');
+var mongoose = require("mongoose");
+var bodyParser = require("body-parser");
 var exphbs = require('express-handlebars')
 
 // Initialiaze express...
 var app = express();
+
+// Require all models
+var db = require("./models");
 
 var PORT = 3000
 
@@ -20,25 +27,28 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', '.hbs');
 
+
+// ===============================
+// Configure middleware and DB connection
+// ===============================
+
+// using body parser for handling submissions...
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // static directory...
 app.use(express.static("./public"));
 
-// db config...
-var databaseUrl = 'nyt-app';
-var collections = ['articles'];
+// use morgan logger to log requests
+app.use(logger("dev"));
 
-// hooking mongojs config to the db variable
-var db = mongojs(databaseUrl, collections);
-db.on('error', function(error) {
-	console.log('Database Error:', error);
+// connecting to mongodb and setting it up to use promises
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/nyt-scraper", {
+  useMongoClient: true
 });
 
 // load ROUTES
 require('./routes/routes.js')(app);
-
-
-
-
 
 
 
