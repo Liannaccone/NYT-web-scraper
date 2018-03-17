@@ -3,31 +3,30 @@ var request = require('request');
 var cheerio = require('cheerio');
 var mongoose = require('mongoose');
 var axios = require("axios");
+var db = require('../models')
 
 exports.displayHome = function (req, res) {
 	res.render('home')
 }
 
 exports.scrape = function(req, res) {
-   	request('http://www.nytimes.com', function(error, response, html) {
-   		var $ = cheerio.load(html);
-
-   		var results = [];
+   	axios.get('http://www.nytimes.com').then(function(response) {
+   		var $ = cheerio.load(response.data);
 
    		$('article.story').each(function(i, element) {
-
-   			var url = $(element).children('h2').children('a').attr('href');
-   			var headline = $(element).children('h2').children('a').text();
-   			var summary = $(element).children('p.summary').text();
-   			if(url && headline) {
-	   			results.push({
-	   				headline: headline,
-	   				summary: summary,
-	   				url: url
-	   			});
-	   		}
+            var result = {};
+   			result.url = $(this).children('h2').children('a').attr('href');
+   			result.headline = $(this).children('h2').children('a').text();
+   			result.summary = $(this).find('p.summary').text();
+   			
+            if(result.url && result.headline) {
+               db.Article.create(result)
+                  .then(function(dbArticle) {
+                     console.log(dbArticle);
+                  }).catch(function(err) {
+                     return res.json(err)
+                  });
+	   		};
    		});
-   		console.log(results)
    	})
 }
-// 'h2.story-heading'

@@ -43,9 +43,7 @@ app.use(logger("dev"));
 
 // connecting to mongodb and setting it up to use promises
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/nyt-scraper", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://localhost/nyt-scraper", {});
 
 // load ROUTES
 require('./routes/routes.js')(app);

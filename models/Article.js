@@ -18,11 +18,15 @@ var ArticleSchema = new Schema ({
 		required: true
 		// add match with regex expression
 		// match: [(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&], 'Not a valid URL']
+	},
+	comment: {
+		type: Schema.Types.ObjectId,
+		ref: 'Note'
 	}
-})
+});
 
 // create model using the above schema...
-var Article = mongoose.Model('Article', ArticleSchema);
+var Article = mongoose.model('Article', ArticleSchema);
 
 // ... and export it
 module.exports = Article;
