@@ -6,6 +6,8 @@ module.exports = function(app) {
 
     app.get('/scrape', controller.scrape)
 
+    app.get('/articles', controller.displayArticles)
+
     
 
 }

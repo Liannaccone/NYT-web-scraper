@@ -30,3 +30,14 @@ exports.scrape = function(req, res) {
    		});
    	})
 }
+
+
+exports.displayArticles = function(req, res) {
+   db.Article.find({})
+    .then(function(data) {
+      res.json(data)
+    })
+    .catch(function(err) {
+      res.json(err)
+    });
+};
