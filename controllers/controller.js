@@ -19,7 +19,7 @@ exports.scrape = function(req, res) {
    			result.headline = $(this).children('h2').children('a').text();
    			result.summary = $(this).find('p.summary').text();
    			
-            if(result.url && result.headline) {
+            if(result.url && result.headline && result.summary) {
                db.Article.create(result)
                   .then(function(dbArticle) {
                      console.log(dbArticle);
