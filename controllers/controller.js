@@ -19,12 +19,23 @@ exports.displayHome = function (req, res) {
 }
 
 exports.displaySaved = function(req, res) {
-  res.render('saved')
+   db.Article.find({saved: true})
+    .then(function(data) {
+      var hbsObject = {};
+      hbsObject.savedArticles = data
+      // console.log(hbsObject)
+      res.render('saved', hbsObject)
+    })
+    .catch(function(err) {
+      res.json(err)
+    });
 }
 
 exports.saveArticle = function(req, res) {
-  db.Article.update({id: req.body.id}, {$set: {saved: true}}).then(function(cb) {
+  db.Article.update({_id: Object(req.body.id)}, {$set: {saved: true}})
+  .then(function(cb) {
     console.log('Save successful');
+  });
 }
 
 // exports.deleteArticle = function(req, res) {
@@ -35,13 +46,11 @@ exports.saveArticle = function(req, res) {
 exports.scrape = function(req, res) {
    	axios.get('http://www.nytimes.com').then(function(response) {
    		var $ = cheerio.load(response.data);
-
    		$('article.story').each(function(i, element) {
             var result = {};
    			result.url = $(this).children('h2').children('a').attr('href');
    			result.headline = $(this).children('h2').children('a').text();
    			result.summary = $(this).find('p.summary').text();
-   			
             if(result.url && result.headline && result.summary) {
                db.Article.create(result)
                   .then(function(dbArticle) {
@@ -49,7 +58,7 @@ exports.scrape = function(req, res) {
                   }).catch(function(err) {
                      return res.json(err)
                   });
-	   		};
+	   		    };
    		});
    	})
 }

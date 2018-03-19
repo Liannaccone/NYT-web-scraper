@@ -3,7 +3,14 @@
   	<h5 class="card-header"><a class="article-link" target="_blank" href="{{url}}">{{headline}}"</a></h5>
   	<div class="card-body">
       <p class="card-text">{{summary}}</p>
-      <div class="card-text text-right"><button class="btn btn-success btn-md save" data-id='{{_id}}'>Save Article</button></div>
+      <div class="card-text text-right">
+      	{{#if saved}}
+      		<button class="btn btn-info btn-md comment" data-id='{{_id}}'>Comment</button>
+      		<button class="btn btn-danger btn-md delete" data-id='{{_id}}'>Delete From Saved</button>
+      	{{else}}
+			<button class="btn btn-success btn-md save" data-id='{{_id}}'>Save Article</button>
+		{{/if}}
+      </div>
     </div>
   </div>
 
