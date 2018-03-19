@@ -10,5 +10,19 @@ $(document).ready(function() {
 	    });
 	});
 
+	$('.save').on('click', function(event) {
+		var condition = {
+			id: $(this).data('id')
+		}
+		$.ajax({
+			method: 'PUT',
+			data: condition,
+			url: '/save'
+		}).done(function(response) {
+			alert('Saved...')
+			// code to show modal here that article successfully saved..
+		})
+	})
+
 
 })

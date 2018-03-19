@@ -20,6 +20,11 @@ var ArticleSchema = new Schema ({
 		// add match with regex expression
 		// match: [(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&], 'Not a valid URL']
 	},
+	saved: {
+		type: Boolean,
+		default: false,
+		required: true
+	},
 	comment: {
 		type: Schema.Types.ObjectId,
 		ref: 'Note'

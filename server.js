@@ -42,8 +42,9 @@ app.use(express.static("./public"));
 app.use(logger("dev"));
 
 // connecting to mongodb and setting it up to use promises
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper"
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/nyt-scraper", {});
+mongoose.connect(MONGODB_URI, {});
 
 // load ROUTES
 require('./routes/routes.js')(app);

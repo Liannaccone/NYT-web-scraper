@@ -10,7 +10,7 @@ exports.displayHome = function (req, res) {
     .then(function(data) {
       var hbsObject = {};
       hbsObject.articles = data
-      console.log(hbsObject)
+      // console.log(hbsObject)
       res.render('home', hbsObject)
     })
     .catch(function(err) {
@@ -21,6 +21,16 @@ exports.displayHome = function (req, res) {
 exports.displaySaved = function(req, res) {
   res.render('saved')
 }
+
+exports.saveArticle = function(req, res) {
+  db.Article.update({id: req.body.id}, {$set: {saved: true}}).then(function(cb) {
+    console.log('Save successful');
+}
+
+// exports.deleteArticle = function(req, res) {
+//   // need to include id criteria
+//   db.Article.remove({});
+// }
 
 exports.scrape = function(req, res) {
    	axios.get('http://www.nytimes.com').then(function(response) {
