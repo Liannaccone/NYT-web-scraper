@@ -1,0 +1,37 @@
+
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <h1 class="navbar-brand mb-0">Mongo Scraper</h1>
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link active" href="/saved">Saved Articles</a>
+        </div>
+        <div class="text-right">
+          <button type="button" class="btn btn-danger scrape">Scrape New Articles</button>
+        </div>
+      </nav>
+    </header>
+
+
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Mongo Scraper</h1>
+          <p class="lead text-muted">New York Times Edition</p> 
+        </div>
+      </section>
+      <div class="container card-columns article-container">
+        {{#each articles}}
+          {{> article-block}}
+        {{/each}}
+      </div>
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+      </div>
+    </footer>
+

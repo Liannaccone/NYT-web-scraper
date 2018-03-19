@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+	
 	$('.scrape').on('click', function(event) {
 		$.ajax({
 			method: 'GET',

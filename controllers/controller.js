@@ -18,6 +18,10 @@ exports.displayHome = function (req, res) {
     });
 }
 
+exports.displaySaved = function(req, res) {
+  res.render('saved')
+}
+
 exports.scrape = function(req, res) {
    	axios.get('http://www.nytimes.com').then(function(response) {
    		var $ = cheerio.load(response.data);
