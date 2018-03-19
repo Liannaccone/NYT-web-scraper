@@ -31,7 +31,7 @@ exports.scrape = function(req, res) {
             if(result.url && result.headline && result.summary) {
                db.Article.create(result)
                   .then(function(dbArticle) {
-                     console.log(dbArticle);
+                     return
                   }).catch(function(err) {
                      return res.json(err)
                   });

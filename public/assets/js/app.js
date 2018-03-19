@@ -6,6 +6,7 @@ $(document).ready(function() {
 	    	url: '/scrape'
 	  	}).done(function(response) {
 	    	console.log("scraped: " + response);
+	    	location.reload();
 	    });
 	});
 

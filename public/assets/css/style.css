@@ -5,8 +5,8 @@
 .jumbotron {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
-  margin-bottom: 0;
-  background-color: #fff;
+  margin-bottom: 30px;
+
 }
 @media (min-width: 768px) {
   .jumbotron {
