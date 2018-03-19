@@ -6,7 +6,16 @@ var axios = require("axios");
 var db = require('../models')
 
 exports.displayHome = function (req, res) {
-	res.render('home')
+   db.Article.find({})
+    .then(function(data) {
+      var hbsObject = {};
+      hbsObject.articles = data
+      console.log(hbsObject)
+      res.render('home', hbsObject)
+    })
+    .catch(function(err) {
+      res.json(err)
+    });
 }
 
 exports.scrape = function(req, res) {

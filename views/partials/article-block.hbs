@@ -1,14 +1,26 @@
-<div class="panel panel-default">
+{{!-- <div class="card w-75 border-dark mb-3">
 
-	<div class="panel-heading">
-		<h3>
+	<div class="card-header">
+		<h4>
 			<a class="article-link" target="_blank" href="{{url}}">{{headline}}"</a>
 			<a class="btn btn-success save">Save Article</a>
-		</h3>
+		</h4>
 	</div>
 
-	<div class="panel-body">{{summary}}
+	<div class="card-body text-dark">
+		<h6 class='card-title'>Author</h6>
+		<p class="card-text">{{summary}}</p>
 	</div>
 
 </div>
+<br> --}}
+
+  <div class="card">
+  	<h5 class="card-header"><a class="article-link" target="_blank" href="{{url}}">{{headline}}"</a></h5>
+  	<div class="card-body">
+      <p class="card-text">{{summary}}</p>
+      <div class="card-text text-right"><button class="btn btn-success btn-md save">Save Article</button></div>
+    </div>
+  </div>
+
 
