@@ -17,7 +17,21 @@ $(document).ready(function() {
 		$.ajax({
 			method: 'PUT',
 			data: condition,
-			url: '/save'
+			url: '/article'
+		}).done(function(response) {
+			alert('Saved...')
+			// code to show modal here that article successfully saved..
+		})
+	})
+
+		$('.delete').on('click', function(event) {
+		var condition = {
+			id: $(this).data('id')
+		}
+		$.ajax({
+			method: 'DELETE',
+			data: condition,
+			url: '/article'
 		}).done(function(response) {
 			alert('Saved...')
 			// code to show modal here that article successfully saved..

@@ -38,10 +38,13 @@ exports.saveArticle = function(req, res) {
   });
 }
 
-// exports.deleteArticle = function(req, res) {
-//   // need to include id criteria
-//   db.Article.remove({});
-// }
+exports.deleteArticle = function(req, res) {
+  db.Article.update({_id: Object(req.body.id)}, {$set: {saved: false}})
+  .then(function(cb) {
+    console.log('Unsaved article');
+  });
+}
+
 
 exports.scrape = function(req, res) {
    	axios.get('http://www.nytimes.com').then(function(response) {
