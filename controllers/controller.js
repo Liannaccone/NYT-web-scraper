@@ -33,37 +33,42 @@ exports.displaySaved = function(req, res) {
 
 exports.saveArticle = function(req, res) {
   db.Article.update({_id: Object(req.body.id)}, {$set: {saved: true}})
-  .then(function(cb) {
-    console.log('Save successful');
+    .then(function(data) {
+      res.json(data)
   });
 }
 
 exports.deleteArticle = function(req, res) {
   db.Article.update({_id: Object(req.body.id)}, {$set: {saved: false}})
-  .then(function(cb) {
-    console.log('Unsaved article');
+  .then(function(result) {
+    console.log('Removed article');
+    return res.status(200).end();
   });
 }
 
 
 exports.scrape = function(req, res) {
-   	axios.get('http://www.nytimes.com').then(function(response) {
-   		var $ = cheerio.load(response.data);
-   		$('article.story').each(function(i, element) {
-            var result = {};
-   			result.url = $(this).children('h2').children('a').attr('href');
-   			result.headline = $(this).children('h2').children('a').text();
-   			result.summary = $(this).find('p.summary').text();
-            if(result.url && result.headline && result.summary) {
-               db.Article.create(result)
-                  .then(function(dbArticle) {
-                     return
-                  }).catch(function(err) {
-                     return res.json(err)
-                  });
-	   		    };
-   		});
-   	})
+  db.Article.remove({saved:false})
+    .then(function(response) {
+       axios.get('http://www.nytimes.com')
+        .then(function(response) {
+   	       var $ = cheerio.load(response.data);
+         		$('article.story').each(function(i, element) {
+                  var result = {};
+         			result.url = $(this).children('h2').children('a').attr('href');
+         			result.headline = $(this).children('h2').children('a').text();
+         			result.summary = $(this).find('p.summary').text();
+                  if(result.url && result.headline && result.summary) {
+                     db.Article.create(result)
+                        .then(function(dbArticle) {
+                           res.json(dbArticle)
+                        }).catch(function(err) {
+                           return res.json(err)
+                        });
+	  		            };
+   	         });
+         })
+    })
 }
 
 

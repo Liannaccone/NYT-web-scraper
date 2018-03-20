@@ -5,8 +5,8 @@ $(document).ready(function() {
 			method: 'GET',
 	    	url: '/scrape'
 	  	}).done(function(response) {
-	    	console.log("scraped: " + response);
-	    	location.reload();
+	    	console.log('\n\n\n*****\n',response,'\n***');
+	    	
 	    });
 	});
 
@@ -19,7 +19,8 @@ $(document).ready(function() {
 			data: condition,
 			url: '/article'
 		}).done(function(response) {
-			alert('Saved...')
+			alert('Article saved.')
+			location.reload();
 			// code to show modal here that article successfully saved..
 		})
 	})
@@ -33,7 +34,8 @@ $(document).ready(function() {
 			data: condition,
 			url: '/article'
 		}).done(function(response) {
-			alert('Saved...')
+			alert('Article removed.')
+			location.reload();
 			// code to show modal here that article successfully saved..
 		})
 	})
