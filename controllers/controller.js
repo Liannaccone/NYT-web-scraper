@@ -6,7 +6,7 @@ var axios = require("axios");
 var db = require('../models')
 
 exports.displayHome = function (req, res) {
-   db.Article.find({})
+   db.Article.find({saved: false})
     .then(function(data) {
       var hbsObject = {};
       hbsObject.articles = data
