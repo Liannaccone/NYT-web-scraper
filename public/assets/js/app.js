@@ -5,8 +5,8 @@ $(document).ready(function() {
 			method: 'GET',
 	    	url: '/scrape'
 	  	}).done(function(response) {
-	    	console.log('\n\n\n*****\n',response,'\n***');
-	    	
+	    	alert('Articles scraped')
+	    	location.reload();
 	    });
 	});
 
