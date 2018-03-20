@@ -44,13 +44,13 @@ app.use(logger("dev"));
 // connecting to mongodb and setting it up to use promises
 var MONGODB_URI = 'mongodb://heroku_gq2q3swn:o20vpnhpto1g8p2qdfaaevorhr@ds215019.mlab.com:15019/heroku_gq2q3swn' 
 mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {});
+mongoose.connect(MONGODB_URI);
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper";
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper";
+// mongoose.Promise = Promise;
+// mongoose.connect(MONGODB_URI, {
+//   useMongoClient: true
+// });
 
 // load ROUTES
 require('./routes/routes.js')(app);
