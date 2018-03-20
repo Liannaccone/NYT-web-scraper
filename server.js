@@ -42,7 +42,7 @@ app.use(express.static("./public"));
 app.use(logger("dev"));
 
 // connecting to mongodb and setting it up to use promises
-var MONGODB_URI = 'mongodb://heroku_gq2q3swn:o20vpnhpto1g8p2qdfaaevorhr@ds215019.mlab.com:15019/heroku_gq2q3swn' || "mongodb://localhost/nyt-scraper"
+var MONGODB_URI = 'mongodb://heroku_gq2q3swn:o20vpnhpto1g8p2qdfaaevorhr@ds215019.mlab.com:15019/heroku_gq2q3swn' 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, {});
 
@@ -54,4 +54,6 @@ require('./routes/routes.js')(app);
 app.listen(PORT, function() {
 	console.log('App running on port', PORT)
 });
+
+// || "mongodb://localhost/nyt-scraper"
 // MONGODB_URI: mongodb://heroku_gq2q3swn:o20vpnhpto1g8p2qdfaaevorhr@ds215019.mlab.com:15019/heroku_gq2q3swn
