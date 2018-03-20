@@ -18,7 +18,7 @@ var app = express();
 // Require all models
 var db = require("./models");
 
-var PORT = 3000
+var PORT = process.env.PORT || 3000;
 
 // set up handlebars..
 app.engine('hbs', exphbs({
@@ -46,15 +46,9 @@ var MONGODB_URI = process.env.MONGOBD_URI || "mongodb://localhost/nyt-scraper"
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
 
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper";
-// mongoose.Promise = Promise;
-// mongoose.connect(MONGODB_URI, {
-//   useMongoClient: true
-// });
 
 // load ROUTES
 require('./routes/routes.js')(app);
-
 
 
 app.listen(PORT, function() {
