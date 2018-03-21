@@ -41,10 +41,14 @@ app.use(express.static("./public"));
 // use morgan logger to log requests
 app.use(logger("dev"));
 
-// connecting to mongodb and setting it up to use promises
-var MONGODB_URI = process.env.MONGOBD_URI || "mongodb://localhost/nyt-scraper"
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+mongoose.Promise = global.Promise;
+// Connect to the Mongo DB
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/nyt-scraper",
+  {
+    useMongoClient: true
+  }
+);
 
 
 // load ROUTES
